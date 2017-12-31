@@ -16,7 +16,33 @@
                         http://www.springframework.org/schema/tx
                         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
     <!-- 设置使用注解的类所在的jar包 -->
-    <context:component-scan base-package="com.fmi110" />
+    <context:component-scan base-package="com.fmi110"/>
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--限定单个文件的大小-->
+        <property name="maxUploadSizePerFile">
+            <value>1024000000</value>
+        </property>
+        <!--请求的编码格式 , 需要与页面的编码保持一致 , 以确保正确读取表单的内容-->
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--&lt;!&ndash;定义默认的异常处理页面，当该异常类型的注册时使用&ndash;&gt;-->
+        <!--<property name="defaultErrorView" value="error.jsp">-->
+        <!--</property>-->
+        <!--&lt;!&ndash;定义异常处理页面用来获取异常信息的变量名，默认名为exception&ndash;&gt;-->
+        <!--<property name="exceptionAttribute" value="ex"></property>-->
+        <!--&lt;!&ndash;定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值&ndash;&gt;-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--<prop key="com.fmi110.exception.MyException">error-my.jsp</prop>-->
+                <!--&lt;!&ndash;这里还可以继续扩展对不同异常类型的处理&ndash;&gt;-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
 </beans>
